@@ -1,0 +1,14 @@
+0 Apple
+1 Banana
+2 Beetroot
+3 Corn
+4 Cucumber
+5 Lemon
+6 Mango
+7 Onion
+8 Orange
+9 Peas
+10 Pineapple
+11 Potato
+12 Tomato
+13 Watermelon
