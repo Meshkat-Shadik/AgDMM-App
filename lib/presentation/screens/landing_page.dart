@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mock_img_recognition/data/model/data_model.dart';
 import 'package:mock_img_recognition/data/temp_data.dart';
 import 'package:mock_img_recognition/presentation/screens/info_screen.dart';
+import 'package:mock_img_recognition/presentation/widgets/list_items.dart';
 import 'package:tflite/tflite.dart';
 
 class LandingPage extends StatefulWidget {
@@ -75,7 +76,7 @@ class _LandingPageState extends State<LandingPage> {
       _confidence = _result != null ? (_result?[0]['confidence'] * 100.0) : 0.0;
       if (widget.name == 'Rice') {
         rawData = riceData;
-        index = _result?[0]["index"] - 1;
+        index = _result?[0]["index"];
       } else if (widget.name == 'Maize') {
         rawData = maizeData;
         index = _result?[0]["index"];
@@ -217,6 +218,8 @@ class _LandingPageState extends State<LandingPage> {
                           fontStyle: FontStyle.italic,
                         ),
                       ),
+                      const SizedBox(height: 100),
+                      AllData(genre: widget.name),
                     ],
                   ),
           ],
@@ -235,7 +238,8 @@ class _LandingPageState extends State<LandingPage> {
               ),
               child: IconButton(
                 onPressed: () async {
-                  if (widget.name == 'Maize' && index == 3) {
+                  if ((widget.name == 'Maize' && index == 3) ||
+                      (widget.name == 'Rice' && index == 0)) {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
@@ -250,31 +254,17 @@ class _LandingPageState extends State<LandingPage> {
                       },
                     );
                   } else {
-                    rawData![index!] != null
-                        ? Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => InfoScreen(
-                                diseaseName: _name,
-                                data: widget.name == 'Rice'
-                                    ? rawData![index! - 1]
-                                    : rawData![index!],
-                              ),
-                            ),
-                          )
-                        : showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                content: Container(
-                                  alignment: Alignment.center,
-                                  height: 250,
-                                  color: Colors.green.shade100,
-                                  child: Text('No Data Found!'),
-                                ),
-                              );
-                            },
-                          );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => InfoScreen(
+                          diseaseName: _name,
+                          data: widget.name == 'Rice'
+                              ? rawData![index! - 1]
+                              : rawData![index!],
+                        ),
+                      ),
+                    );
                   }
                 },
                 icon: Icon(

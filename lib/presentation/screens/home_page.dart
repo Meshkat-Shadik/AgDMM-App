@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mock_img_recognition/presentation/screens/landing_page.dart';
 import 'package:mock_img_recognition/presentation/widgets/section_button.dart';
 import 'package:tflite/tflite.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -33,19 +34,6 @@ class _MyHomePageState extends State<MyHomePage> {
   late final dref = FirebaseDatabase.instance.reference();
   late DatabaseReference databaseReference;
 
-  grabImage(ImageSource source) async {
-    var tempStore = await ImagePicker().pickImage(source: source);
-    setState(() {
-      if (tempStore != null) {
-        pickedImage = File(tempStore.path);
-        isImageLoaded = true;
-        applyModelOnImage(pickedImage!);
-      } else {
-        print('Please select an Image to test');
-      }
-    });
-  }
-
   showData() async {
     dref.once().then((value) {
       print(value.value);
@@ -58,37 +46,9 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  loadModel(String model, String label) async {
-    var result = await Tflite.loadModel(
-      model: model,
-      // 'assets/model_unquant.tflite',
-      labels: label,
-      //'assets/labels.txt',
-    );
-    print("Result after loading model: $result");
-  }
-
-  applyModelOnImage(File file) async {
-    var res = await Tflite.runModelOnImage(
-      path: file.path,
-      numResults: 2,
-      threshold: 0.00005,
-      imageMean: 127.5,
-      imageStd: 127.5,
-    );
-    setState(() {
-      print(res);
-      _result = res;
-      String str = _result?[0]["label"];
-      _name = str.substring(2);
-      _confidence = _result != null ? (_result?[0]['confidence'] * 100.0) : 0.0;
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    //loadModel();
     showData();
   }
 
@@ -100,116 +60,244 @@ class _MyHomePageState extends State<MyHomePage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            onPressed: () async {
-              return showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      content: Container(
-                        height: 250,
-                        color: Colors.green.shade100,
-                        child: Column(
-                          //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            IconButton(
-                              onPressed: () async {
-                                return await showData();
-                              },
-                              icon: Icon(Icons.refresh),
-                              tooltip: 'Refresh',
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Column(
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 25,
-                                      backgroundColor: Colors.green.shade800,
-                                      child: Text(
-                                        humid == null
-                                            ? ".."
-                                            : '${humid?.toStringAsFixed(1)}',
-                                        style: GoogleFonts.breeSerif(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Text('Humidity')
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 25,
-                                      backgroundColor: Colors.green.shade800,
-                                      child: Text(
-                                        lIntense == null
-                                            ? ".."
-                                            : '${lIntense?.toStringAsFixed(1)}',
-                                        style: GoogleFonts.breeSerif(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Text('Light Intensity')
-                                  ],
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 20),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Column(
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 25,
-                                      backgroundColor: Colors.green.shade800,
-                                      child: Text(
-                                        moisture == null ? ".." : '${moisture}',
-                                        style: GoogleFonts.breeSerif(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Text('Soil Moisture')
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 25,
-                                      backgroundColor: Colors.green.shade800,
-                                      child: Text(
-                                        temp == null
-                                            ? ".."
-                                            : '${temp!.toStringAsFixed(1)}',
-                                        style: GoogleFonts.breeSerif(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Text('Temperature')
-                                  ],
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    );
-                  });
-            },
-            icon: Icon(Icons.sensors),
-          ),
           title: Text(
             widget.title,
             style: TextStyle(fontSize: 18),
           ),
           centerTitle: true,
           backgroundColor: Colors.green.shade800,
+        ),
+        drawer: Drawer(
+          // Add a ListView to the drawer. This ensures the user can scroll
+          // through the options in the drawer if there isn't enough vertical
+          // space to fit everything.
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'AgDMM',
+                      style: GoogleFonts.breeSerif(
+                        fontSize: 30,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Text(
+                      'Agro-Disease Monitoring and Management',
+                      style: GoogleFonts.breeSerif(
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Divider(thickness: 1),
+              Container(
+                color: Colors.green.shade50,
+                child: ListTile(
+                  leading: Icon(Icons.sensors),
+                  title: const Text('Sensor Value'),
+                  onTap: () async {
+                    return showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            content: Container(
+                              height: 250,
+                              color: Colors.green.shade100,
+                              child: Column(
+                                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  IconButton(
+                                    onPressed: () async {
+                                      return await showData();
+                                    },
+                                    icon: Icon(Icons.refresh),
+                                    tooltip: 'Refresh',
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Column(
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 25,
+                                            backgroundColor:
+                                                Colors.green.shade800,
+                                            child: Text(
+                                              humid == null
+                                                  ? ".."
+                                                  : '${humid?.toStringAsFixed(1)}',
+                                              style: GoogleFonts.breeSerif(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                          Text('Humidity')
+                                        ],
+                                      ),
+                                      Column(
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 25,
+                                            backgroundColor:
+                                                Colors.green.shade800,
+                                            child: Text(
+                                              lIntense == null
+                                                  ? ".."
+                                                  : '${lIntense?.toStringAsFixed(1)}',
+                                              style: GoogleFonts.breeSerif(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                          Text('Light Intensity')
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Column(
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 25,
+                                            backgroundColor:
+                                                Colors.green.shade800,
+                                            child: Text(
+                                              moisture == null
+                                                  ? ".."
+                                                  : '${moisture}',
+                                              style: GoogleFonts.breeSerif(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                          Text('Soil Moisture')
+                                        ],
+                                      ),
+                                      Column(
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 25,
+                                            backgroundColor:
+                                                Colors.green.shade800,
+                                            child: Text(
+                                              temp == null
+                                                  ? ".."
+                                                  : '${temp!.toStringAsFixed(1)}',
+                                              style: GoogleFonts.breeSerif(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                          Text('Temperature')
+                                        ],
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        });
+                  },
+                ),
+              ),
+              Divider(thickness: 1),
+              Container(
+                color: Colors.green.shade50,
+                child: ListTile(
+                  leading: Icon(Icons.call),
+                  title: const Text('Help Line'),
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          content: Container(
+                            alignment: Alignment.center,
+                            height: 250,
+                            color: Colors.green.shade100,
+                            child: Column(
+                              children: [
+                                const SizedBox(height: 20),
+                                Text(
+                                  'Dr. S.M. Taohidul Islam',
+                                  style: GoogleFonts.breeSerif(
+                                    fontSize: 22,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                Text(
+                                  'Professor',
+                                  style: GoogleFonts.breeSerif(
+                                    fontSize: 18,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                const SizedBox(height: 50),
+                                Text(
+                                  'Contact Information',
+                                  style: GoogleFonts.breeSerif(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                Divider(),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Icon(Icons.call),
+                                    Text(
+                                      '+8801719018370',
+                                      style: GoogleFonts.breeSerif(
+                                        fontSize: 15,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    SizedBox(width: 35),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Icon(Icons.email),
+                                    Text(
+                                      'staohidul@yahoo.com',
+                                      style: GoogleFonts.breeSerif(
+                                        fontSize: 15,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+              Divider(thickness: 1),
+            ],
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -304,9 +392,26 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     SizedBox(height: 10),
-                    SectionButton(
-                      path: 'assets/mung_bean_leaf.png',
-                      title: 'Mung Bean',
+                    GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              content: Container(
+                                alignment: Alignment.center,
+                                height: 60,
+                                color: Colors.green.shade100,
+                                child: Text('Coming Soon!!!'),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                      child: SectionButton(
+                        path: 'assets/mung_bean_leaf.png',
+                        title: 'Mung Bean',
+                      ),
                     ),
                     SizedBox(height: 50),
                     Container(

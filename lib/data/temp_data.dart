@@ -295,6 +295,7 @@ final juteData = [
     cause: 'Data not collected! ',
     bacteria: 'Data not collected!',
     symptoms: 'Data not collected!',
+    origin: 'Data not collected!',
     solution: Solution(
       chemical: 'Data not collected!',
       organic: 'Data not collected!',
@@ -308,6 +309,7 @@ final juteData = [
     cause: 'Data not collected!',
     bacteria: 'Data not collected!',
     symptoms: 'Data not collected!',
+    origin: 'Data not collected!',
     solution: Solution(
       chemical: 'Data not collected!',
       organic: 'Data not collected!',
