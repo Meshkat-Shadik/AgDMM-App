@@ -1,0 +1,7 @@
+0 Healthy Leaf of Rice
+1 Bacterial Blight of Rice
+2 Rice Blast
+3 Rice Brown Spot
+4 Tungro of Rice
+5 Leaf Scald of Rice
+6 Sheath Brown Rot of Rice

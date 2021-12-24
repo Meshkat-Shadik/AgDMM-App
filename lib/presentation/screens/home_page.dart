@@ -3,11 +3,9 @@ import 'dart:io';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:mock_img_recognition/presentation/screens/landing_page.dart';
+import 'package:mock_img_recognition/presentation/widgets/pdf_view.dart';
 import 'package:mock_img_recognition/presentation/widgets/section_button.dart';
-import 'package:tflite/tflite.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -17,6 +15,8 @@ class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
+
+//disease symptoms and solutions
 
 class _MyHomePageState extends State<MyHomePage> {
   late File? pickedImage;
@@ -221,7 +221,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: Colors.green.shade50,
                 child: ListTile(
                   leading: Icon(Icons.call),
-                  title: const Text('Help Line'),
+                  title: const Text('Contact'),
                   onTap: () {
                     showDialog(
                       context: context,
@@ -296,13 +296,28 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               Divider(thickness: 1),
+              Container(
+                color: Colors.green.shade50,
+                child: ListTile(
+                  leading: Icon(Icons.help),
+                  title: Text('Help'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PdfViewWidget()));
+                  },
+                ),
+              ),
+              Divider(thickness: 1),
             ],
           ),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ListView(
-            physics: NeverScrollableScrollPhysics(),
+            physics: BouncingScrollPhysics(),
             children: [
               Container(
                 color: Colors.green.shade50,
@@ -394,23 +409,20 @@ class _MyHomePageState extends State<MyHomePage> {
                     SizedBox(height: 10),
                     GestureDetector(
                       onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              content: Container(
-                                alignment: Alignment.center,
-                                height: 60,
-                                color: Colors.green.shade100,
-                                child: Text('Coming Soon!!!'),
-                              ),
-                            );
-                          },
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LandingPage(
+                              modelPath: 'assets/model_soybean.tflite',
+                              labelPath: 'assets/labels_soybean.txt',
+                              name: 'Soybean',
+                            ),
+                          ),
                         );
                       },
                       child: SectionButton(
-                        path: 'assets/mung_bean_leaf.png',
-                        title: 'Mung Bean',
+                        path: 'assets/soybean_leaf.png',
+                        title: 'Soybean',
                       ),
                     ),
                     SizedBox(height: 50),
@@ -447,8 +459,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-
-
-
-/**/

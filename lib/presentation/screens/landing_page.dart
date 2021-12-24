@@ -83,6 +83,9 @@ class _LandingPageState extends State<LandingPage> {
       } else if (widget.name == 'Jute') {
         rawData = juteData;
         index = _result?[0]["index"];
+      } else if (widget.name == 'Soybean') {
+        rawData = soybeanData;
+        index = _result?[0]["index"];
       }
     });
   }
@@ -236,41 +239,43 @@ class _LandingPageState extends State<LandingPage> {
                   topRight: Radius.circular(50),
                 ),
               ),
-              child: IconButton(
-                onPressed: () async {
-                  if ((widget.name == 'Maize' && index == 3) ||
-                      (widget.name == 'Rice' && index == 0)) {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          content: Container(
-                            alignment: Alignment.center,
-                            height: 250,
-                            color: Colors.green.shade100,
-                            child: Text('No Data Found!'),
+              child: Container(
+                alignment: Alignment.center,
+                child: GestureDetector(
+                  onTap: () async {
+                    if ((widget.name == 'Maize' && index == 3) ||
+                        (widget.name == 'Rice' && index == 0)) {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            content: Container(
+                              alignment: Alignment.center,
+                              height: 250,
+                              color: Colors.green.shade100,
+                              child: Text('No Data Found!'),
+                            ),
+                          );
+                        },
+                      );
+                    } else {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => InfoScreen(
+                            diseaseName: _name,
+                            data: widget.name == 'Rice'
+                                ? rawData![index! - 1]
+                                : rawData![index!],
                           ),
-                        );
-                      },
-                    );
-                  } else {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => InfoScreen(
-                          diseaseName: _name,
-                          data: widget.name == 'Rice'
-                              ? rawData![index! - 1]
-                              : rawData![index!],
                         ),
-                      ),
-                    );
-                  }
-                },
-                icon: Icon(
-                  Icons.arrow_upward_sharp,
-                  size: 28,
-                  color: Colors.white,
+                      );
+                    }
+                  },
+                  child: Text(
+                    'Disease symptoms and solutions',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
             )

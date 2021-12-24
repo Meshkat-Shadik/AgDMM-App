@@ -1,0 +1,5 @@
+0 Anthracnose of Jute
+1 Black Band of Jute
+2 Leaf Mosaic of Jute
+3 Mealybugs of Jute
+4 Powdery Mildew of Jute

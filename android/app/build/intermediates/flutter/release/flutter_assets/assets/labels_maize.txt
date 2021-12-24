@@ -1,0 +1,4 @@
+0 Northern Blight of Maize
+1 Common Rust of Maize
+2 Gray Leaf Spot of Maize
+3 Healthy Leaf of Maize

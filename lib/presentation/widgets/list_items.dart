@@ -30,6 +30,12 @@ class AllData extends StatelessWidget {
     'Powdery Mildew of Jute',
   ];
 
+  List<String> soybeanDiseases = [
+    'Alfalfa mosaic of Soybean',
+    'Bacterial Blight of Soybean',
+    'Brown Stem Rot of Soybean',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,7 +51,7 @@ class AllData extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'Learn about some diseases',
+            'Learn about ${genre.toLowerCase()} diseases',
             style: GoogleFonts.breeSerif(
               fontSize: 18,
             ),
@@ -83,6 +89,18 @@ class AllData extends StatelessWidget {
                   InfoButton(
                     diseaseName: juteDiseases[i],
                     data: juteData[i],
+                    genre: genre,
+                  ),
+                  const SizedBox(height: 10),
+                ],
+              ),
+          if (genre == 'Soybean')
+            for (int i = 0; i < soybeanDiseases.length; i++)
+              Column(
+                children: [
+                  InfoButton(
+                    diseaseName: soybeanDiseases[i],
+                    data: soybeanData[i],
                     genre: genre,
                   ),
                   const SizedBox(height: 10),

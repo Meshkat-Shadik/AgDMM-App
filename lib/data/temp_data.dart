@@ -320,3 +320,67 @@ final juteData = [
     ],
   ),
 ];
+
+final soybeanData = [
+  Data(
+    cause: 'Virus',
+    bacteria: 'Alfalfa mosaic virus',
+    symptoms:
+        'Symptoms are patterns of bright yellow and dark green leaf tissue. Newly emerged leaves may be small with bright yellow spots and brown discoloration and plants may be stunted.',
+    origin: 'Data not collected!',
+    solution: Solution(
+      chemical:
+          'Chemical treatment of viral diseases is not possible. The use of insecticides to control aphid population, and thereby the spreading of the virus, is not effective.',
+      organic: "Sorry, we don't know of any alternative treatment.",
+    ),
+    trigger:
+        'Well-fertilized fields with high yield potential and high aphid density favor virus transmission.Symptoms are most severe during cool weather and may not be detectable at temperatures above 32°C.',
+    defensiveStep: [
+      'Be sure to use certified, virus-free seeds.',
+      'Use resistant or tolerant varieties.',
+      'If possible, choose early planting programs.',
+      'Do not rotate soybean with other hosts of the virus.',
+      'Control weeds in an around the fields.',
+      'Do not over-fertilize your fields during early stages of plant growth.',
+    ],
+  ),
+  Data(
+    cause: 'Bacteria',
+    bacteria: 'Pseudomonas syringae pv. Glycinea',
+    symptoms:
+        'Symptoms usually begin in the upper canopy because young leaves are most susceptible. Small, angular, reddish-brown lesions are surrounded by a yellow halo. As the disease progresses, lesions often grow together to produce large, irregularly shaped dead areas. Centers of older lesions frequently fall out, causing leaves to appear tattered.',
+    origin:
+        'Bacterial blight is caused by the bacterium Pseudomonas savastanoi. It is a seedborne disease that also overwinters in the field on plant residues. Early infections in the seedling stage are usually a sign of contaminated seeds.',
+    solution: Solution(
+      chemical:
+          'Copper fungicides can be used for control of bacterial blight on soybeans but need to be applied early in the disease cycle to be effective.',
+      organic: "Sorry, we don't know of any alternative treatment.",
+    ),
+    trigger:
+        'Wet leaf surface will favor the development of the pathogen, which at some point will enter the tissues via wounds or leaf pores. Rain and wind will also favor the secondary spreading within the plant or between plants. The disease if favored by cool (20-25 °C), wet and windy weather (rainstorms) and limited by hot and dry weather.',
+    defensiveStep: [
+      'Choose varieties that are resistant to the disease.Do not work in the fields when plants are wet to limit the spreading of the disease. ',
+      'Incorporate crop residue by tillage after harvest to reduce the amount of inoculum the next season. ',
+      'Plan a crop rotation with non-susceptible hosts such as maize, wheat and other non-legumes. ',
+    ],
+  ),
+  Data(
+    cause: 'Fungus',
+    bacteria: 'Phialophora gregata',
+    symptoms:
+        'BSR include chlorosis and necrosis between leaf veins. In some instances, no foliar symptoms occur. Foliar symptoms can be similar to those of sudden death syndrome and stem canker and appear after early pod set. Externally, infected stems look healthy. However, when stems are split lengthwise, internal browning of vascular tissue and pith is evident, especially at nodes and in the lower stem. ',
+    origin:
+        'Caused by Phialophora gregata, a fungus that survives in soybean residue.',
+    solution: Solution(
+      chemical: "Sorry, we don't know of any alternative treatment",
+      organic: "Maintain a soil pH of 7 to reduce the risk of brown stem rot.",
+    ),
+    trigger:
+        'The severity of the disease depends on the ambience, soil environments, and crop management systems. Stem and foliar symptoms are most severe when air temperatures range between 60 and 80 F.',
+    defensiveStep: [
+      'Adopt best management practices such as crop rotation, especially with the introduction of 2 to 3 years of non-host crops, spaced between soybean.',
+      'Other approaches include variety selection and tillage are also proven effective.',
+      'Use disease-resistant soybean varieties and cultivars only when high disease pressure is anticipated in an infested field.',
+    ],
+  ),
+];

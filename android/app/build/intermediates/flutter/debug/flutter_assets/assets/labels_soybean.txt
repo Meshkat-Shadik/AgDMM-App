@@ -1,0 +1,3 @@
+0 Alfalfa mosaic of Soybean
+1 Bacterial Blight of Soybean 
+2 Brown Stem Rot of Soybean 

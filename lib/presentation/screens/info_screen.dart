@@ -33,7 +33,7 @@ class InfoScreen extends StatelessWidget {
               title: Row(
                 children: [
                   Text('Scientific Name : '),
-                  Text(data!.bacteria!.toString()),
+                  Flexible(child: Text(data!.bacteria!.toString())),
                 ],
               ),
             ),
