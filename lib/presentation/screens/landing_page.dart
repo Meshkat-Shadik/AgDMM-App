@@ -86,6 +86,9 @@ class _LandingPageState extends State<LandingPage> {
       } else if (widget.name == 'Soybean') {
         rawData = soybeanData;
         index = _result?[0]["index"];
+      } else if (widget.name == 'Wheat') {
+        rawData = wheatData;
+        index = _result?[0]["index"];
       }
     });
   }
@@ -170,7 +173,21 @@ class _LandingPageState extends State<LandingPage> {
                                 elevation: 8,
                                 child: GestureDetector(
                                   onTap: () {
-                                    grabImage(ImageSource.camera);
+                                    widget.name != 'Wheat'
+                                        ? grabImage(ImageSource.camera)
+                                        : showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                content: Container(
+                                                  alignment: Alignment.center,
+                                                  height: 250,
+                                                  color: Colors.green.shade100,
+                                                  child: Text('Coming Soon!!!'),
+                                                ),
+                                              );
+                                            },
+                                          );
                                   },
                                   child: Icon(
                                     Icons.camera_alt,
@@ -194,7 +211,21 @@ class _LandingPageState extends State<LandingPage> {
                                 elevation: 8,
                                 child: GestureDetector(
                                   onTap: () {
-                                    grabImage(ImageSource.gallery);
+                                    widget.name != 'Wheat'
+                                        ? grabImage(ImageSource.gallery)
+                                        : showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                content: Container(
+                                                  alignment: Alignment.center,
+                                                  height: 250,
+                                                  color: Colors.green.shade100,
+                                                  child: Text('Coming Soon!!!'),
+                                                ),
+                                              );
+                                            },
+                                          );
                                   },
                                   child: Icon(
                                     Icons.image,

@@ -384,3 +384,131 @@ final soybeanData = [
     ],
   ),
 ];
+
+final wheatData = [
+  Data(
+    cause: 'Fungus',
+    bacteria: 'Puccinia triticina',
+    symptoms:
+        'Small, orangish-brown lesions are key features of leaf rust infections. These blister-like lesions are most common on leaves but can occur on the leaf sheath, which extends from the base of the leaf blade to the stem node. Lesions caused by leaf rust are normally smaller, more round, and cause less tearing of the leaf tissue than those caused by stem rust.',
+    origin:
+        'The disease is caused by the fungus Puccinia triticina, an obligate parasite of plant tissues. It needs living wheat plants or alternative hosts to complete its life cycle.',
+    solution: Solution(
+      chemical:
+          "Foliar sprays with fungicides containing propiconazole or triazole can be applied preventively to avoid the disease. Carefully read the instructions on how to use the product.",
+      organic:
+          "Sorry, we don't know of any alternative treatment against Puccinia triticina .",
+    ),
+    trigger:
+        'The germination process requires high moisture or a long period of leaf wetness and temperatures between 10° and 30°C (16–22 °C are optimal). In these conditions, the germination of spores can take place within 30 minutes from their first contact with the leaf. High nitrogen fertilization rates are also favorable.',
+    defensiveStep: [
+      'Grow stable and resistant varieties if available.',
+      'Sow winter wheat later and summer wheat sooner than usually.',
+      'Screen fields for volunteer plants and remove them.',
+      'Ensure low crop density at planting.',
+      'Plan and implement a healthy crop rotation.',
+      'Ensure adequate fertilization of nitrogen.',
+      'Remove and destroy crop debris after harvest.',
+    ],
+  ),
+  Data(
+    cause: 'Fungus',
+    bacteria: 'Ustilago segetum var. tritici',
+    symptoms:
+        'The normal head tissue of plants infected by loose smut is completely replaced with dark masses of fungal spores, giving the heads a black powdery appearance. It is possible to see heads damaged by loose smut while much of the head is still inside the boot. Infected heads normally appear lower in the crop canopy than healthy heads. Only the central stem of the head is left after the spores are released.',
+    origin:
+        'The symptoms are caused by the seed-borne fungus Ustilago tritici, that survives in a dormant state within infested wheat seeds. The development of the fungus keeps pace with the life cycle of the plant. When the infested seed germinates, the fungus resumes growth along the shoots of the young wheat plants and eventually colonizes the tissues of the flowers.',
+    solution: Solution(
+      chemical:
+          "An array of other compounds is available to treat the seeds, among others, triticonazole, difenoconazole and tebuconazole.",
+      organic:
+          "Soak the seeds in 20-30°C water for 4-6 hours. Afterwards, dip them into 49°C hot water for 2 minutes. In the next step place the seeds on plastic sheets and expose them to sunlight for another 4 hours. The seeds should be completely air dried before sowing. This treatment reduces the infection risk. but it might affect the germination rate of the seeds.",
+    ),
+    trigger:
+        'Favorable conditions for the rapid germination of the spores are humid weather (60-85% relative humidity) with frequent rains or dews and cool temperatures between 16–22°C.',
+    defensiveStep: [
+      'Use seeds from healthy plants or from certified disease-free sources.',
+      'Plant resistant varieties if available.',
+      'Make sure to clean tools, hands and footwear when working on different fields.',
+    ],
+  ),
+  Data(
+    cause: 'Fungus',
+    bacteria: 'Blumeria graminis ',
+    symptoms:
+        'Signs of powdery mildew include white fungal growths on leaves and leaf sheaths. Glumes and awns also can be infected when the disease is severe. Fungal growth is largely limited to outer plant surfaces and can be easily wiped away by rubbing a finger across affected areas. Mature areas of fungal growth may have dark, reproductive structures mixed with the white, cottony growth of the fungus.',
+    origin:
+        'The symptoms are caused by the fungus Blumeria graminis, an obligate biotroph that can only grow and reproduce on a living host. If no hosts are available, it overwinters between seasons as dormant structures on plant debris in the field.',
+    solution: Solution(
+      chemical:
+          "Seed treatment with difenoconazole, followed by flutriafol, triticonazole was used to protect wheat against this and other fungal diseases. Curative chemical control is possible with fungicides such as fenpropidin, feranimol, tebuconazole, cyproconazole and propiconazole.",
+      organic:
+          "Milk solutions have been used successfully by small organic growers and gardeners as a treatment against powdery mildew. Milk is diluted with water (typically 1:10) and sprayed on susceptible plants at the first sign of infection, or as a preventative measure. Repeated weekly applications are needed to control or eliminate the disease.",
+    ),
+    trigger:
+        'Ideal temperatures are between 16 °C and 21 °C with temperatures above 25 °C being detrimental. No known quarantine regulations exist for this pathogen because of its widespread distribution and airborne dissemination. Densely sowed plants, excessive application of nitrogen and monocultures also provide optimal conditions for the growth of powdery mildew.',
+    defensiveStep: [
+      '	Choose resistant varieties if available.',
+      '	Do not sow too early in the season.',
+      '	Modify sowing density to allow for good aeration of cultures and reduce humidity.',
+      '	Monitor field regularly for the first signs of the disease. ',
+      '	Manage carefully the application of nitrogen, as its excess in soil favors the growth of the pathogen.',
+      '	Plan a crop rotation with non-host plants.',
+      '	Eliminate volunteer plants and weeds from the field to disrupt its life cycle.',
+    ],
+  ),
+  Data(
+    cause: 'Fungus',
+    bacteria: 'Puccinia graminis',
+    symptoms:
+        'Stem rust causes blister-like lesions on leaves, leaf sheaths, and stems. Infection of glumes and awns is also possible. The reddish-brown spores of the fungus cause considerable tearing as they burst through the outer layers of the plant tissues. Mature stem rust lesions are more elongated than those of leaf rust.  ',
+    origin:
+        'The symptoms are caused by the fungus Puccinia graminis, which is an obligate parasite that needs living plant tissue to survive. Spores can be dispersed over great distances by the wind and germinate when in contact with free water. Other means of dispersion are machinery and vehicles, tools, clothing and footwear.',
+    solution: Solution(
+      chemical:
+          "Fungicides containing tebuconazole or prothioconazole can be used to control the fungi. For preventive treatment, fungicides containing triazoles and strobilurins can be applied. Some degree of resistance has been observed with strobilurins.",
+      organic:
+          "Sorry, we don't know of any alternative treatment against Puccinia triticina .",
+    ),
+    trigger:
+        'The fungus infects the plant through natural pores on the leaf surface, a process that is favored by low light intensity (early morning or late afternoon) and prolonged leaf wetness caused by frequent dews or rains. Stem rust is also favored by hot days (25-30°C) and mild nights (15-20°C) conducive to the formation of dew.',
+    defensiveStep: [
+      'Use disease-resistant wheat varieties.',
+      'Use varieties which mature early.',
+      'Plant as early as possible in the spring.',
+      'Plant as late as possible during the autumn to avoid adverse conditions.',
+      'Monitor fields regularly for any sign of the disease.',
+      'Remove weeds, volunteer plants and species of Berberis shrubs growing in the area.',
+      'Avoid excessive nitrogen fertilization.',
+      'Keep sufficient space between plants to ensure a good ventilation of the plants.',
+      'Remove and destroy all plant residues to prevent survival of the fungus in field.',
+      'Thoroughly clean tools, footwear, hands and trousers before entering another field.',
+    ],
+  ),
+  Data(
+    cause: 'Fungus',
+    bacteria: 'Pyrenophora tritici-repentis',
+    symptoms:
+        'The key diagnostic feature of tan spot is tan lesions with a yellow margin. Mature tan spot lesions often have a dark area in the center. Lesions may merge as they expand, resulting in large sections of diseased leaf tissue. The fungus that causes tan spot survives in the debris of previous wheat crops and produces small, black reproductive structures in the spring.',
+    origin:
+        'The symptoms are caused by the fungus Pyrenophora tritici-repentis. During the winter it survives on wheat straw or on seeds.',
+    solution: Solution(
+      chemical:
+          "Foliar sprays of fungicides based on pyraclostrobin, picoxystrobin, propiconazole and prothioconazole have shown high efficiency against tan spot.",
+      organic:
+          "Sorry, we don't know of any alternative treatment against Pyrenophora tritici-repentis.",
+    ),
+    trigger:
+        'The production of spores is favored by humidity above 95%. Secondary infection is favored by leaf wetness, high relative humidity and temperatures above 10 °C for 2 days. The optimum temperature for tan spot spreading is 20-25 degrees.',
+    defensiveStep: [
+      'Buy certified seeds, as the fungus is frequently transmitted by infected seeding material.',
+      'Grow resistant varieties if available.',
+      'Use a wider spacing between your plants to hinder fungal growth.',
+      'Thorough tilling after harvest reduces the risk for tan spot significantly, as the fungus is sensitive to competing microorganisms in the soil.',
+      'Crop rotation with non-host plants such as mustard, flax, crambe, or soybean every second or third year is recommended.',
+      'Monitor the plants carefully between shoot and inflorescence stages.',
+      'Plow and destroy all plant residues after harvest.',
+      'Use balanced fertilization to enhance plant resistance.',
+    ],
+  ),
+];

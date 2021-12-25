@@ -37,10 +37,6 @@ class _PdfViewWidget extends State<PdfViewWidget> {
         'assets/help_line.pdf',
         key: _pdfViewerKey,
       ),
-      // body: SfPdfViewer.network(
-      //   'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
-      //   key: _pdfViewerKey,
-      // ),
     );
   }
 }

@@ -35,6 +35,13 @@ class AllData extends StatelessWidget {
     'Bacterial Blight of Soybean',
     'Brown Stem Rot of Soybean',
   ];
+  List<String> wheatDiseases = [
+    'Wheat Leaf Rust',
+    'Loose Smut of Wheat',
+    'Powdery Mildew of Wheat',
+    'Wheat Stem Rust',
+    'Tan Spot of Wheat',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -101,6 +108,19 @@ class AllData extends StatelessWidget {
                   InfoButton(
                     diseaseName: soybeanDiseases[i],
                     data: soybeanData[i],
+                    genre: genre,
+                  ),
+                  const SizedBox(height: 10),
+                ],
+              ),
+
+          if (genre == 'Wheat')
+            for (int i = 0; i < wheatDiseases.length; i++)
+              Column(
+                children: [
+                  InfoButton(
+                    diseaseName: wheatDiseases[i],
+                    data: wheatData[i],
                     genre: genre,
                   ),
                   const SizedBox(height: 10),

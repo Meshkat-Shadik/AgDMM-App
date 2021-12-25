@@ -425,6 +425,25 @@ class _MyHomePageState extends State<MyHomePage> {
                         title: 'Soybean',
                       ),
                     ),
+                    SizedBox(height: 10),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LandingPage(
+                              modelPath: 'assets/model_soybean.tflite',
+                              labelPath: 'assets/labels_soybean.txt',
+                              name: 'Wheat',
+                            ),
+                          ),
+                        );
+                      },
+                      child: SectionButton(
+                        path: 'assets/wheat_leaf.png',
+                        title: 'Wheat',
+                      ),
+                    ),
                     SizedBox(height: 50),
                     Container(
                       alignment: Alignment.center,
