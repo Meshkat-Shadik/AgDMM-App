@@ -1,8 +1,8 @@
 /windows
-/android
-/ios
-/build
-/test
+/android/
+/ios/
+/build/
+/test/
 # Miscellaneous
 *.class
 *.log
