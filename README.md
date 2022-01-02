@@ -1,4 +1,4 @@
-# mock_img_recognition
+# Agri Disease Monitoring and Management
 
 A new Flutter project.
 
