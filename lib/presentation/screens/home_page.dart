@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mock_img_recognition/presentation/screens/landing_page.dart';
 import 'package:mock_img_recognition/presentation/widgets/pdf_view.dart';
 import 'package:mock_img_recognition/presentation/widgets/section_button.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:mock_img_recognition/translations/locale_keys.g.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -21,10 +23,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late File? pickedImage;
   bool isImageLoaded = false;
-  List? _result;
-  double? _confidence = 0.0;
-  String _name = "";
-  String _numbers = "";
+  bool isEnglish = true;
 
   dynamic humid = 0;
   dynamic lIntense = 0;
@@ -64,6 +63,31 @@ class _MyHomePageState extends State<MyHomePage> {
             widget.title,
             style: TextStyle(fontSize: 18),
           ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    isEnglish = !isEnglish;
+                    isEnglish
+                        ? context.setLocale(const Locale('en'))
+                        : context.setLocale(const Locale('bn'));
+                  });
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  width: 50,
+                  child: Text(
+                    isEnglish ? '🇬🇧' : '🇧🇩',
+                    style: TextStyle(
+                      fontSize: 32,
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
           centerTitle: true,
           backgroundColor: Colors.green.shade800,
         ),
@@ -235,7 +259,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               children: [
                                 const SizedBox(height: 20),
                                 Text(
-                                  'Dr. S.M. Taohidul Islam',
+                                  LocaleKeys.contact_sir_name.tr(),
                                   style: GoogleFonts.breeSerif(
                                     fontSize: 22,
                                     color: Colors.black,
@@ -351,7 +375,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                       child: SectionButton(
                         path: 'assets/rice_leaf.png',
-                        title: 'Rice',
+                        title: LocaleKeys.btn_item_rice.tr(),
                       ),
                     ),
                     SizedBox(height: 10),
@@ -383,7 +407,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         },
                         child: SectionButton(
                           path: 'assets/maize_leaf.png',
-                          title: 'Maize',
+                          title: LocaleKeys.btn_item_maize.tr(),
                         ),
                       ),
                     ),
@@ -403,7 +427,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                       child: SectionButton(
                         path: 'assets/jute_leaf.png',
-                        title: 'Jute',
+                        title: LocaleKeys.btn_item_jute.tr(),
                       ),
                     ),
                     SizedBox(height: 10),
@@ -422,7 +446,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                       child: SectionButton(
                         path: 'assets/soybean_leaf.png',
-                        title: 'Soybean',
+                        title: LocaleKeys.btn_item_soybean.tr(),
                       ),
                     ),
                     SizedBox(height: 10),
@@ -441,7 +465,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                       child: SectionButton(
                         path: 'assets/wheat_leaf.png',
-                        title: 'Wheat',
+                        title: LocaleKeys.btn_item_wheat.tr(),
                       ),
                     ),
                     SizedBox(height: 50),
