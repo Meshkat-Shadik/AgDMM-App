@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mock_img_recognition/data/language_cubit/language_cubit.dart';
 import 'package:mock_img_recognition/presentation/screens/landing_page.dart';
 import 'package:mock_img_recognition/presentation/widgets/pdf_view.dart';
 import 'package:mock_img_recognition/presentation/widgets/section_button.dart';
@@ -23,7 +25,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late File? pickedImage;
   bool isImageLoaded = false;
-  bool isEnglish = true;
 
   dynamic humid = 0;
   dynamic lIntense = 0;
@@ -66,25 +67,30 @@ class _MyHomePageState extends State<MyHomePage> {
           actions: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isEnglish = !isEnglish;
-                    isEnglish
-                        ? context.setLocale(const Locale('en'))
-                        : context.setLocale(const Locale('bn'));
-                  });
-                },
-                child: Container(
-                  alignment: Alignment.center,
-                  width: 50,
-                  child: Text(
-                    isEnglish ? '🇬🇧' : '🇧🇩',
-                    style: TextStyle(
-                      fontSize: 32,
+              child: BlocBuilder<LanguageCubit, bool>(
+                builder: (context, state) {
+                  return GestureDetector(
+                    onTap: () {
+                      BlocProvider.of<LanguageCubit>(context)
+                          .toggleLang(value: !state);
+                      setState(() {
+                        state
+                            ? context.setLocale(const Locale('en'))
+                            : context.setLocale(const Locale('bn'));
+                      });
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 50,
+                      child: Text(
+                        state ? '🇧🇩' : '🇬🇧',
+                        style: TextStyle(
+                          fontSize: 32,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
             )
           ],
